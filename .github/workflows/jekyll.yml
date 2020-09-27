@@ -30,4 +30,4 @@ jobs:
           context: .
           file: ./Dockerfile.builder
           push: true
-          tags: pzalejko/quarkus-github-actions-demo:${{ job.container.id }}
+          tags: pzalejko/quarkus-github-actions-demo:latest
