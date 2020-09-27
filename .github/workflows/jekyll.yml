@@ -10,7 +10,6 @@ on:
   pull_request:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   native_build:
     runs-on: ubuntu-latest
@@ -18,7 +17,7 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@master
-      - name: Build native executable and upload it as an artifact
+      - name: Build native executable
         uses: maxday/quarkus-native-build-docker-action@1
+        with:
           outputName: myApp-runner
-          dockerfilePath: Dockerfile
