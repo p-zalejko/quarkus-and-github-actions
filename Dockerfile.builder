@@ -8,7 +8,7 @@ RUN mvn -f /tmp/my-project/pom.xml -Pnative clean package
 
 ## Stage 2 : create the docker final image
 FROM registry.access.redhat.com/ubi8/ubi-minimal
-WORKDIR /work/
+WORKDIR /usr/src/app/target/
 COPY --from=build /tmp/my-project/target/*-runner /usr/src/app/target
 RUN chmod 775 /usr/src/app/target
 EXPOSE 8080
