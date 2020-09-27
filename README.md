@@ -5,7 +5,7 @@ This repo shows how to use Github Actions for building and dockerizing a quarkus
 # Description
 For integation this project uses:
 - Docker multi-stage build - see [Dockerfile](Dockerfile)
-- Github Docker Build and Push action - see [.github/workflows/jekyll.yml](build pipeline)
+- Github Docker Build and Push action - see [build pipeline](.github/workflows/jekyll.yml)
 
 
 # Links
