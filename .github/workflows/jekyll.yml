@@ -1,24 +1,33 @@
-# This is a basic workflow to help you get started with Actions
+name: ci
 
-name: CI
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: master
 
 jobs:
-  native_build:
+  path-context:
     runs-on: ubuntu-latest
-    name: Build native Quarkus app
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@master
-      - name: Build native executable
-        uses: maxday/quarkus-native-build-docker-action@1
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          outputName: myApp-runner
-          dockerfilePath: Dockerfile.builder
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_API_KEY }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.builder
+          push: true
+          tags: pzalejko/quarkus-github-actions-demo:latest
