@@ -1,6 +1,6 @@
 # Quarkus Github Actions demo
 
-This repo shows how to use Github Actions for building and dockerizing a quarkus application. 
+This repo shows how to use Github Actions for building and dockerizing a quarkus application. The app itself is just a [hello world](https://quarkus.io/guides/getting-started).
 
 # Description
 This project uses:
