@@ -21,3 +21,4 @@ jobs:
         uses: maxday/quarkus-native-build-docker-action@1
         with:
           outputName: myApp-runner
+          dockerfilePath: Dockerfile.builder
