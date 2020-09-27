@@ -46,6 +46,7 @@
     </dependency>
   </dependencies>
   <build>
+    <finalName>myApp</finalName>
     <plugins>
       <plugin>
         <groupId>io.quarkus</groupId>
