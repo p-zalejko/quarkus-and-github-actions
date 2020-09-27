@@ -28,6 +28,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile.builder
+          file: ./Dockerfile
           push: true
           tags: pzalejko/quarkus-github-actions-demo:latest
