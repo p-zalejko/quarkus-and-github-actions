@@ -48,6 +48,12 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
+    -
+      name: Set docker image name env
+      run: echo ::set-env name=DOCKER_IMAGE_NAME::pzalejko/quarkus-github-actions-demo
+    -
+      name: Set docker image tag env
+      run: echo ::set-env name=DOCKER_TAG_VERSION::$(echo $GITHUB_RUN_NUMBER)
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
@@ -56,10 +62,10 @@ jobs:
 
     - name: Update Kubernetes resources
       env:
-        DOCKER_IMAGE: ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_TAG_VERSION }}
+        DOCKER_IMAGE_NAME: ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_TAG_VERSION }}
       run: |
        cd k8s
-       kustomize edit set image quarkus-demo=$DOCKER_IMAGE
+       kustomize edit set image quarkus-demo=$DOCKER_IMAGE_NAME
        cat kustomization.yaml
 
     - name: Commit files
