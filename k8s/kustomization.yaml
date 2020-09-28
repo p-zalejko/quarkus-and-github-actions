@@ -7,3 +7,5 @@ resources:
 #namespace: quarkus-demo
 images:
 - name: quarkus-demo
+  newName: pzalejko/quarkus-github-actions-demo
+  newTag: latest
