@@ -30,4 +30,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: pzalejko/quarkus-github-actions-demo:latest
+          tags: pzalejko/quarkus-github-actions-demo:$GITHUB_RUN_NUMBER
