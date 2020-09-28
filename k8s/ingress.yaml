@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: quarkus-demo
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - host: quarkus-demo.localhost
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: quarkus-demo
+              servicePort: 80

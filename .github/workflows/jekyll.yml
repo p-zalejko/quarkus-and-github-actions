@@ -5,14 +5,17 @@ on:
     branches: master
 
 jobs:
-  path-context:
+  build:
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout
         uses: actions/checkout@v2
-      - 
-        name: Set env
+      -
+        name: Set docker image name env
+        run: echo ::set-env name=DOCKER_IMAGE_NAME::pzalejko/quarkus-github-actions-demo
+      -
+        name: Set docker image tag env
         run: echo ::set-env name=DOCKER_TAG_VERSION::$(echo $GITHUB_RUN_NUMBER)
       -
         name: Set up QEMU
@@ -34,5 +37,38 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            pzalejko/quarkus-github-actions-demo:${{ env.DOCKER_TAG_VERSION }}
-            pzalejko/quarkus-github-actions-demo:latest
+            ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_TAG_VERSION }}
+            ${{ env.DOCKER_IMAGE_NAME }}:latest
+
+  updateK8s:
+    name: updateK8s
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Setup Kustomize
+      uses: imranismail/setup-kustomize@v1
+      with:
+        kustomize-version: "3.8.4"
+
+    - name: Update Kubernetes resources
+      env:
+        DOCKER_IMAGE: ${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_TAG_VERSION }}
+      run: |
+       cd kustomize/base
+       kustomize edit set image quarkus-demo=$DOCKER_IMAGE
+       cat kustomization.yaml
+
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -am "Bump docker tag"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}

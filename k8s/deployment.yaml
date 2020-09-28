@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quarkus-demo
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: quarkus-demo
+  template:
+    metadata:
+      labels:
+        app: quarkus-demo
+    spec:
+      containers:
+      - image: pzalejko/quarkus-github-actions-demo:latest
+        name: quarkus-demo
+        ports:
+        - containerPort: 8080
