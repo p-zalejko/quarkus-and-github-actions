@@ -11,8 +11,6 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
-      - name: Set env
-        run: echo ::set-env name=DOCKER_TAG_NAME::$(echo $GITHUB_RUN_NUMBER)
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -32,4 +30,6 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: pzalejko/quarkus-github-actions-demo:${{ env.DOCKER_TAG_NAME }}
+          tags: |
+            pzalejko/quarkus-github-actions-demo:${{ env.GITHUB_RUN_NUMBER }}
+            pzalejko/quarkus-github-actions-demo:latest
