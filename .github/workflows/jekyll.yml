@@ -32,4 +32,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: $DOCKER_TAG_NAME
+          tags: echo $DOCKER_TAG_NAME
