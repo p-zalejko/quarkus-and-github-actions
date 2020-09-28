@@ -34,5 +34,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            pzalejko/quarkus-github-actions-demo:${{ env.DOCKER_TAG_NAME }}
+            pzalejko/quarkus-github-actions-demo:${{ GITHUB_RUN_NUMBER }}
             pzalejko/quarkus-github-actions-demo:latest
