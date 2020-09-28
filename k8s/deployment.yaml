@@ -14,7 +14,7 @@ spec:
         app: quarkus-demo
     spec:
       containers:
-      - image: pzalejko/quarkus-github-actions-demo:latest
+      - image: quarkus-demo
         name: quarkus-demo
         ports:
         - containerPort: 8080

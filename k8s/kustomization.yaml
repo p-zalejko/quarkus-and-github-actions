@@ -4,7 +4,6 @@ resources:
 - deployment.yaml
 - svc.yaml
 - ingress.yaml
-#namespace: quarkus-demo
 images:
 - name: quarkus-demo
   newName: pzalejko/quarkus-github-actions-demo
