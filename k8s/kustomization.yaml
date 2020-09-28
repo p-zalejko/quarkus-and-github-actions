@@ -8,4 +8,4 @@ resources:
 images:
 - name: quarkus-demo
   newName: pzalejko/quarkus-github-actions-demo
-  newTag: latest
+  newTag: "38"
