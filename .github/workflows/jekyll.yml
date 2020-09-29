@@ -66,7 +66,6 @@ jobs:
       run: |
        cd k8s
        kustomize edit set image quarkus-demo=$DOCKER_IMAGE_NAME
-       cat kustomization.yaml
 
     - name: Commit files
       run: |
