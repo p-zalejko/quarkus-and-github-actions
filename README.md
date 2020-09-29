@@ -6,6 +6,7 @@ This repo shows how to use Github Actions for building and dockerizing a quarkus
 This project uses:
 - Docker multi-stage build - see [Dockerfile](Dockerfile)
 - Github Docker Build and Push action - see [build pipeline](.github/workflows/jekyll.yml)
+- [kustomize](https://github.com/kubernetes-sigs/kustomize) for updating k8s resources after successful builds - see [build pipeline](.github/workflows/jekyll.yml)
 
 
 # Links
